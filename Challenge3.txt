@@ -1,0 +1,33 @@
+
+#!/bin/bash
+
+# Function to retrieve a nested value from an object
+get_nested_value() {
+    local object="$1"
+    local key="$2"
+    local value="null"
+
+    if [ -n "$object" ] && [ -n "$key" ]; then
+        value=$(echo "$object" | jq -r "$key // null")
+    fi
+
+    echo "$value"
+}
+
+# Example usage:
+nested_object='{
+    "a": {
+        "b": {
+            "c": "d"
+        }
+    }
+}'
+key="a.b.c"
+
+result=$(get_nested_value "$nested_object" ".${key//./.}")
+echo "$result"  # Output: "d"
+
+
+
+
+

@@ -1,0 +1,8 @@
+
+#!/bin/bash
+
+# Retrieve the entire AWS instance metadata and format it as JSON
+metadata_json=$(curl -s http://169.254.169.254/latest/dynamic/instance-identity/document | jq '.')
+
+# Print the JSON-formatted metadata
+echo "$metadata_json"
